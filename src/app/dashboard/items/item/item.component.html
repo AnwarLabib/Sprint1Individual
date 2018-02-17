@@ -21,9 +21,9 @@
           <div style="float:left;padding:20px;">
           <h4 class="list-group-item-heading" style="">{{item.name}}
           </h4>
-          <p class="list-group-item-text" style="">Seller: {{item.sellerName}}</p>
-          <p class="list-group-item-text" style="">Created: {{item.created.getDate()}}/{{item.created.getMonth()}}/{{item.created.getFullYear()}}</p>
-          <p class="list-group-item-text" style="">Updated: {{item.updated.getDate()}}/{{item.updated.getMonth()}}/{{item.updated.getFullYear()}}</p>
+          <p class="list-group-item-text">Seller: Anwar{{item.sellerName}}</p>
+          <p class="list-group-item-text">Created: {{item.createdAt|date:'MM/dd/yyyy'}}</p>
+          <p class="list-group-item-text">Updated: {{item.updatedAt|date:'MM/dd/yyyy'}}</p>
         </div>
       </a>
     </div> 
@@ -60,8 +60,8 @@
             <div class="form-group">
               <label
                 for="price" style="font-weight:600">Price</label>
-              <input [(ngModel)]="price" style="padding:5px;"
-                type="text" id="price" class="form-control" type="number">
+              <input [(ngModel)]="price" style="padding:5px;" step="50"
+                id="price" class="form-control" type="number">
             </div>
           </div>
         </div>

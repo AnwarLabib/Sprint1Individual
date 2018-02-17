@@ -1,17 +1,17 @@
 export class Item{
-    public id: number;
+    public _id: number;
     public name: string;
     public price: number;
-    public created: Date;
-    public updated: Date;
+    public createdAt: Date;
+    public updatedAt: Date;
     public sellerName: string;
-  constructor(id:number, name:string, price:number, created:Date,updated:Date,sellerName:string)
+  constructor(id:number, name:string, price:number, createdAt:Date,updatedAt:Date,sellerName:string)
   {
-    this.id=id;
+    this._id=id;
     this.name=name;
     this.price=price;
-    this.created = created;
-    this.updated = updated;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
     this.sellerName = sellerName;
   }
 }

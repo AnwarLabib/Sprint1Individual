@@ -1,58 +1,28 @@
 import { Item } from "./item.model";
 import { Subject } from "rxjs/Subject";
+import { Http } from '@angular/http';
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
 
+@Injectable()
 export class ItemsService{
     
+    constructor(private http:Http){
+        this.getItems();
+        
+
+        
+    }
+
     itemSubject = new Subject();
 
 
-    items: Item[] = [
-        new Item(
-            1,
-            'Alienware',
-            500,
-            new Date(),
-            new Date('December 17, 1995'),
-            'Rony'
-        ),
-        new Item(
-            2,
-            'underware',
-            500,
-            new Date(),
-            new Date('December 17, 1995'),
-            'Anwar'
-        ),
-        new Item(
-            3,
-            'Alienbass',
-            500,
-            new Date(),
-            new Date('December 17, 1995'),
-            'Anwar'
-        ),
-        new Item(
-            4,
-            'Cool Name',
-            500,
-            new Date(),
-            new Date('December 17, 1995'),
-            'Anwar'
-        ),
-        new Item(
-            5,
-            'GUC SUCKS',
-            500,
-            new Date(),
-            new Date('December 17, 1995'),
-            'Anwar'
-        )
-    ];
+    items: Item[];
 
 
     findIndexById(item:Item){
         for(var i = 0; i<this.items.length;i++){
-            if(item.id==this.items[i].id){
+            if(item._id==this.items[i]._id){
               return i;
             }
         }
@@ -60,14 +30,49 @@ export class ItemsService{
 
     deleteItem(item:Item){
         var index = this.findIndexById(item);
-        this.items.splice(index,1);
-        this.itemSubject.next(this.items.slice());
+        // this.items.splice(index,1);
+        // this.itemSubject.next(this.items.slice());
+        this.http.delete(`http://localhost:3000/api/product/deleteProduct/${item._id}`)
+        .subscribe((res: Response)=>{
+            this.getItems();
+        });
+    
     }
 
     editItem(id:number,updatedItem:Item){
         var index = this.findIndexById(updatedItem);
-        this.items[index] = updatedItem;
-        this.itemSubject.next(this.items.slice());
+        
+        // this.items[index] = updatedItem;
+        // this.itemSubject.next(this.items.slice());
+
+        this.http.patch(`http://localhost:3000/api/product/updateProduct/${updatedItem._id}`,updatedItem)
+        .subscribe((res: Response)=>{
+            this.getItems();
+        });
+    }
+
+    addProduct(name:string,price:number){
+        var item = new Item(null,name,price,new Date(),new Date(),'Anwar');
+        // this.items.push(item);
+        // this.itemSubject.next(this.items.slice());
+
+        this.http.post('http://localhost:3000/api/product/createProduct',item)
+        .subscribe((res: Response)=>{
+            this.getItems();            
+        },(err)=>{
+            console.log(err);
+        });
+        
+    }
+
+    getItems(){
+        this.http.get('http://localhost:3000/api/product/getProducts')
+        .subscribe((res:Response)=>{
+            this.items = res.json().data;
+            this.itemSubject.next(this.items.slice());
+        });
+
+        
     }
 
 

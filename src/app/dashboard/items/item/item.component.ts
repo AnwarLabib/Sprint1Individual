@@ -28,8 +28,8 @@ export class ItemComponent implements OnInit {
     this.name = this.item.name;
     this.price = this.item.price;
     this.sellerName = this.item.sellerName;
-    this.created = ""+this.item.created.getDate()+"/"+this.item.created.getMonth()+"/"+this.item.created.getFullYear();
-    this.updated = ""+this.item.updated.getDate()+"/"+this.item.updated.getMonth()+"/"+this.item.updated.getFullYear();
+    // this.created = ""+this.item.created.getDate()+"/"+this.item.created.getMonth()+"/"+this.item.created.getFullYear();
+    // this.updated = ""+this.item.updated.getDate()+"/"+this.item.updated.getMonth()+"/"+this.item.updated.getFullYear();
   }
 
   onDelete(){
@@ -48,19 +48,19 @@ export class ItemComponent implements OnInit {
   }
 
   onEditItem(){
-    var newCreatedArray=this.created.split("/",4);
-    var day = newCreatedArray[0];
-    var month = newCreatedArray[1];
-    var year = newCreatedArray[2];
-    var newCreatedDate = new Date(year,month,day);
+    // var newCreatedArray=this.created.split("/",4);
+    // var day = newCreatedArray[0];
+    // var month = newCreatedArray[1];
+    // var year = newCreatedArray[2];
+    // var newCreatedDate = new Date(year,month,day);
 
-    var newupdatedArray=this.updated.split("/",4);
-    var day = newupdatedArray[0];
-    var month = newupdatedArray[1];
-    var year = newupdatedArray[2];
-    var newupdatedDate = new Date(year,month,day);
+    // var newupdatedArray=this.updated.split("/",4);
+    // var day = newupdatedArray[0];
+    // var month = newupdatedArray[1];
+    // var year = newupdatedArray[2];
+    // var newupdatedDate = new Date(year,month,day);
 
-    this.itemService.editItem(this.item.id,new Item(this.item.id,this.name,this.price,newCreatedDate,newupdatedDate,this.sellerName));
+    this.itemService.editItem(this.item._id,new Item(this.item._id,this.name,this.price,this.item.createdAt,new Date(),this.sellerName));
     this.editMode=false;
   }
 
