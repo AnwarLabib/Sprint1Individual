@@ -23,7 +23,7 @@ import {
   ThemeSwitcherComponent,
   StatusCardComponent
 } from './components';
-import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
+import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe,FilterPipe } from './pipes';
 import { MainLayoutComponent } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -53,7 +53,7 @@ const COMPONENTS = [
   MainLayoutComponent
 ];
 
-const PIPES = [CapitalizePipe, PluralPipe, RoundPipe, TimingPipe];
+const PIPES = [CapitalizePipe, PluralPipe, RoundPipe, TimingPipe,FilterPipe];
 
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(

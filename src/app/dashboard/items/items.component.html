@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-md-10" style="padding-right:0px">
+        <input type="text" [(ngModel)]="filteredStatus" placeholder="Search by Name" class="form-control"/>
+    </div>
+    <div class="offset-md-1 col-md-1">
+        <button class="btn btn-success" style="float:right;font-weight:bolder">ADD Item</button>
+    </div>
+</div>
+<hr/>
+<app-item *ngFor="let item of items | filter:filteredStatus:'name'" [item]="item"></app-item>
